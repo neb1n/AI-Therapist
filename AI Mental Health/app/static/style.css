@@ -1,0 +1,128 @@
+/*!These maintain as the base styles*/
+body {
+  margin: 0;
+  font-family: 'Segoe UI', sans-serif;
+  background: #e8f5e9 url('https://source.unsplash.com/featured/?plants,leaves') no-repeat center center fixed;
+  background-size: cover;
+  color: #2e4d3a;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+}
+
+/*!Styling the container*/
+
+.container {
+  background-color: rgba(255, 255, 255, 0.9);
+  padding: 2rem;
+  border-radius: 16px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
+  width: 90%;
+  max-width: 500px;
+  backdrop-filter: blur(4px);
+  animation: fadeIn 1s ease;
+}
+
+h1 {
+  text-align: center;
+  font-size: 2rem;
+  margin-bottom: 0.2rem;
+  color: #3b5e47;
+}
+
+.subtitle {
+  text-align: center;
+  font-size: 1rem;
+  margin-bottom: 1.5rem;
+  color: #5d7c6a;
+}
+
+/*!Styling the chat box*/
+.chat-box {
+  border: 1px solid #cce0d2;
+  padding: 1rem;
+  height: 320px;
+  overflow-y: auto;
+  border-radius: 10px;
+  background: #f6fbf7;
+  margin-bottom: 1rem;
+  display: flex;
+  flex-direction: column;
+}
+
+.message {
+  padding: 0.6rem 0.8rem;
+  border-radius: 12px;
+  margin-bottom: 0.5rem;
+  max-width: 90%;
+  word-wrap: break-word;
+  opacity: 0;
+  transform: translateY(10px);
+  animation: slideFadeIn 0.4s ease forwards;
+}
+
+.message.user {
+  background-color: #d1e7dd;
+  align-self: flex-end;
+  margin-left: auto;
+}
+
+.message.bot {
+  background-color: #e9f5ec;
+  align-self: flex-start;
+  margin-right: auto;
+}
+
+/*!Styling the input area */
+form {
+  display: flex;
+  gap: 0.5rem;
+}
+
+input[type="text"] {
+  flex: 1;
+  padding: 0.6rem;
+  border: 1px solid #b5d5bb;
+  border-radius: 10px;
+  outline: none;
+  font-size: 1rem;
+}
+
+button {
+  padding: 0.6rem 1rem;
+  background-color: #6bbf59;
+  color: white;
+  border: none;
+  border-radius: 10px;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+button:hover {
+  background-color: #579e47;
+}
+
+/*!Animations created pretty quickly, don't judge how bad they look*/
+@keyframes slideFadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: scale(0.97);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}

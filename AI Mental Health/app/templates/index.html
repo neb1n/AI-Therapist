@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Therapist</title>
+  <link rel="stylesheet" href="/static/style.css" />
+</head>
+<body>
+  <div class="container">
+    <h1>AI Therapy</h1>
+    <p class="subtitle">Therapy Bot</p>
+
+    <div class="chat-box" id="chat-box">
+      <div class="message bot animate-in">Hi, I'm Hannah your personal therapist bot.</div>
+      <div class="message bot animate-in">Everything you tell me I will forget after you close this.</div>
+    </div>
+
+    <form id="chat-form">
+      <input type="text" id="user-input" placeholder="Type your thoughts..." autocomplete="off" required />
+      <button type="submit">Send</button>
+    </form>
+  </div>
+
+  <script>
+    const chatBox = document.getElementById("chat-box");
+    const form = document.getElementById("chat-form");
+    const userInput = document.getElementById("user-input");
+
+    form.addEventListener("submit", async (e) => {
+      e.preventDefault();
+      const message = userInput.value.trim();
+      if (!message) return;
+
+      appendMessage("user", message);
+      userInput.value = "";
+
+      appendMessage("bot", "Typing...");
+
+      try {
+        const response = await fetch("/api/chat", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ message })
+        });
+
+        const data = await response.json();
+        removeTypingIndicator();
+        appendMessage("bot", data.reply);
+      } catch (error) {
+        removeTypingIndicator();
+        appendMessage("bot", "Something went wrong. Please try again later.");
+        console.error(error);
+      }
+    });
+
+    function appendMessage(sender, text) {
+      const msg = document.createElement("div");
+      msg.classList.add("message", sender, "animate-in");
+      msg.textContent = text;
+      chatBox.appendChild(msg);
+      chatBox.scrollTop = chatBox.scrollHeight;
+    }
+
+    function removeTypingIndicator() {
+      const messages = document.querySelectorAll(".message.bot");
+      const lastMsg = messages[messages.length - 1];
+      if (lastMsg && lastMsg.textContent === "Typing...") {
+        lastMsg.remove();
+      }
+    }
+  </script>
+</body>
+</html>
