@@ -98,7 +98,6 @@ app/
 
 ## 🙋‍♂️ Author
 
-Built with care by **\[Your Name]**
 → GitHub: [https://github.com/neb1n](https://github.com/neb1n)
 
 Feel free to reach out with feedback, ideas, or collaboration proposals!
